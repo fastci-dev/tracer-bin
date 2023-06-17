@@ -1,0 +1,19 @@
+name: Tracer Workflow
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name if needed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run Tracer
+      run: |
+        sudo ./tracer &
+        sleep 5  # Give some time for the tracer process to start
