@@ -23,3 +23,4 @@ runs:
         chmod +x tracer
         sudo ./tracer &
         sleep 5
+      shell: bash
