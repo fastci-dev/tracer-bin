@@ -1,9 +1,10 @@
 name: Tracer Workflow
 
 on:
-  push:
-    branches:
-      - main  # Adjust the branch name if needed
+  workflow_call:
+#   push:
+#     branches:
+#       - main  # Adjust the branch name if needed
 
 jobs:
   build:
