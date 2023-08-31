@@ -19,8 +19,8 @@ runs:
 
     - name: Start Fastci Tracer Action
       run: |
-        curl -O -L https://raw.githubusercontent.com/fastci-dev/tracer-bin/main/tracer
-        chmod +x tracer
-        sudo ./tracer &
+        curl -O -L https://raw.githubusercontent.com/fastci-dev/tracer-bin/main/tracer-bin
+        chmod +x tracer-bin
+        sudo -E SERVER_HOST=localhost SERVER_PORT=50051 ./tracer-bin &
         sleep 5
       shell: bash
