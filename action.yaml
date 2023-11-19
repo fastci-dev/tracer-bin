@@ -21,6 +21,6 @@ runs:
       run: |
         curl -O -L https://raw.githubusercontent.com/fastci-dev/tracer-bin/main/tracer-bin
         chmod +x tracer-bin
-        sudo -E SERVER_HOST=176.34.142.250 SERVER_PORT=50051 ./tracer-bin &
+        sudo -E SERVER_HOST=63.34.12.1 SERVER_PORT=50052 ./tracer-bin &
         sleep 5
       shell: bash
