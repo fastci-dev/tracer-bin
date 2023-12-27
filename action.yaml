@@ -21,6 +21,5 @@ runs:
       run: |
         curl -O -L https://github.com/fastci-dev/tracer-bin/releases/download/main/tracer-bin
         chmod +x tracer-bin
-        sudo -E ./tracer-bin --worker &
-        sudo -E SERVER_HOST=ec2-63-34-12-1.eu-west-1.compute.amazonaws.com SERVER_PORT=50051 ./tracer-bin --agent &        
+        sudo -E SERVER_HOST=ec2-63-34-12-1.eu-west-1.compute.amazonaws.com SERVER_PORT=50051 ./tracer-bin &        
       shell: bash
