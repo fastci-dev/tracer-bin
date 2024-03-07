@@ -16,4 +16,3 @@ jobs:
         curl -O -L https://raw.githubusercontent.com/fastci-dev/tracer-bin/main/tracer
         chmod +x tracer
         sudo ./tracer &
-        sleep 5
