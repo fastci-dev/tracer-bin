@@ -17,6 +17,9 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Expose GitHub Runtime
+      uses: fastci-dev/ghaction-github-runtime@master
+
     - name: Start Fastci Tracer Action
       run: |
         curl -O -L https://github.com/fastci-dev/tracer-bin/releases/download/main/tracer-bin
