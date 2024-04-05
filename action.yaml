@@ -25,5 +25,5 @@ runs:
         curl -O -L https://github.com/fastci-dev/tracer-bin/releases/download/main/tracer-bin
         chmod +x tracer-bin
         
-        sudo -E SERVER_HOST=8.tcp.eu.ngrok.io SERVER_PORT=21962 ./tracer-bin &        
+        sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
       shell: bash
