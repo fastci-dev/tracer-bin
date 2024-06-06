@@ -28,9 +28,9 @@ runs:
         chmod +x docker-build-alias.sh
         chmod +x tracer-bin
         # Alias
-        echo ${PWD}  
+        export DOCKER_ALIAS_PATH=${PWD}  
         echo ${PWD}/docker-build-alias.sh
-        alias docker='${PWD}/docker-build-alias.sh "$@"'      
+        alias docker='${DOCKER_ALIAS_PATH}/docker-build-alias.sh "$@"'      
         # Start tracer
         sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
       shell: bash
