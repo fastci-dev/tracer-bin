@@ -29,8 +29,8 @@ runs:
         chmod +x tracer-bin
         # Alias
         echo ${PWD}  
-        echo ${PWD}/docker-wrapper.sh
-        alias docker='${PWD}/docker-wrapper.sh "$@"'      
+        echo ${PWD}/docker-build-alias.sh
+        alias docker='${PWD}/docker-build-alias.sh "$@"'      
         # Start tracer
         sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
       shell: bash
