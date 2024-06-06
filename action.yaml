@@ -27,6 +27,7 @@ runs:
         # Permissions
         chmod +x docker-build-alias.sh
         chmod +x tracer-bin
+        cat docker-build-alias.sh
         # Alias
         echo ${PWD}  
         alias docker='${PWD}/docker-wrapper.sh "$@"'      
