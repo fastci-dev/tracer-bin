@@ -23,7 +23,11 @@ runs:
     - name: Start Fastci Tracer Action
       run: |
         curl -O -L https://github.com/fastci-dev/tracer-bin/releases/download/main/tracer-bin
+        curl -O -L https://github.com/fastci-dev/tracer-bin/releases/download/main/utils/docker-build-alias.sh
+        chmod +x docker-build-alias.sh
         chmod +x tracer-bin
+        ls
+        pwd
         
         sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
       shell: bash
