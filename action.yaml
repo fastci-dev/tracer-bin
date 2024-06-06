@@ -23,13 +23,13 @@ runs:
     - name: Start Fastci Tracer Action
       run: |
         curl -O -L https://github.com/fastci-dev/tracer-bin/releases/download/main/tracer-bin
-        curl -O -L https://github.com/fastci-dev/tracer-bin/releases/download/main/utils/docker-build-alias.sh
+        curl -O -L https://github.com/fastci-dev/tracer-bin/releases/download/main/docker-build-alias.sh
         # Permissions
         chmod +x docker-build-alias.sh
         chmod +x tracer-bin
-        cat docker-build-alias.sh
         # Alias
         echo ${PWD}  
+        echo ${PWD}/docker-wrapper.sh
         alias docker='${PWD}/docker-wrapper.sh "$@"'      
         # Start tracer
         sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
