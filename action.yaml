@@ -28,6 +28,6 @@ runs:
         chmod +x tracer-bin
         ls
         pwd
-        
-        sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
+        echo ${PWD}        
+        # sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
       shell: bash
