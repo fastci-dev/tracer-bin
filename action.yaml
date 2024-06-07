@@ -24,7 +24,7 @@ runs:
       shell: bash
       run: |
         # docker() {command bash /home/runner/work/github-actions-tests/github-actions-tests/docker-build-alias.sh "$@"} && export -f docker
-        echo 'FASTCI=docker() {command bash /home/runner/work/github-actions-tests/github-actions-tests/docker-build-alias.sh "$@"} && export -f docker' >> $GITHUB_ENV
+        echo 'FASTCI=docker() { bash /home/runner/work/github-actions-tests/github-actions-tests/docker-build-alias.sh "$@"}' >> $GITHUB_ENV
         
     - name: Start Fastci Tracer Action
       run: |
