@@ -27,10 +27,13 @@ runs:
         # Permissions
         chmod +x docker-build-alias.sh
         chmod +x tracer-bin
-        # Alias
-        export DOCKER_ALIAS_PATH=${PWD}  
-        echo ${PWD}/docker-build-alias.sh
-        alias docker='${DOCKER_ALIAS_PATH}/docker-build-alias.sh "$@"'      
+        
+        # Alias docker to our script
+        docker() {
+            command bash /home/runner/work/github-actions-tests/github-actions-tests/docker-build-alias.sh "$@"
+          }
+        export -f docker
+        
         # Start tracer
         sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
       shell: bash
