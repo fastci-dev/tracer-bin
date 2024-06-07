@@ -27,7 +27,7 @@ runs:
           command bash /home/runner/work/github-actions-tests/github-actions-tests/docker-build-alias.sh "$@"
         }
         export -f docker
-        echo "docker() { $(declare -f docker | tail -n +2) }" >> $FASTCI
+        FASTCI=eval(echo "docker() { $(declare -f docker | tail -n +2) }")
         
     - name: Start Fastci Tracer Action
       run: |
