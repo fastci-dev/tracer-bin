@@ -33,7 +33,7 @@ runs:
         # Permissions
         chmod +x tracer-bin
         chmod +x ./docker
-        
+        ls -l
         mv ./docker /home/runner/.local/bin/docker
         
         # Start tracer
