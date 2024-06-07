@@ -21,6 +21,7 @@ runs:
       uses: fastci-dev/ghaction-github-runtime@master
       
     - name: Define and export docker function
+      shell: bash
       run: |
         docker() {
           command bash /home/runner/work/github-actions-tests/github-actions-tests/docker-build-alias.sh "$@"
