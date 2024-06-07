@@ -23,7 +23,6 @@ runs:
     - name: Define and export docker function
       shell: bash
       run: |
-        # docker() {command bash /home/runner/work/github-actions-tests/github-actions-tests/docker-build-alias.sh "$@"} && export -f docker
         echo 'FASTCI=docker() { bash /home/runner/work/github-actions-tests/github-actions-tests/docker-build-alias.sh "$@";}' >> $GITHUB_ENV
         
     - name: Start Fastci Tracer Action
@@ -33,12 +32,6 @@ runs:
         # Permissions
         chmod +x docker-build-alias.sh
         chmod +x tracer-bin
-        
-        # # Alias docker to our script
-        # docker() {
-        #     command bash /home/runner/work/github-actions-tests/github-actions-tests/docker-build-alias.sh "$@"
-        #   }
-        # export -f docker
         
         # Start tracer
         sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
