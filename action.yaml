@@ -18,13 +18,6 @@ runs:
     - name: Expose GitHub Runtime
       uses: fastci-dev/ghaction-github-runtime@master
 
-    - name: Login to JFrog 🐸  
-      uses: docker/login-action@v1
-      with:
-        registry: fastci.jfrog.io
-        username: ${{ secrets.JFROG_USER_WRITER }}
-        password: ${{ secrets.JFROG_PASSWORD_WRITER }}
-
     - name: Install Buildx
       run: docker buildx create --use --name mybuilder --driver docker-container
 
