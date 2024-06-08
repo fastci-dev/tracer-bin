@@ -19,8 +19,8 @@ runs:
       uses: fastci-dev/ghaction-github-runtime@master
 
     - name: Install Buildx
+      shell: bash
       run: docker buildx create --use --name mybuilder --driver docker-container
-
               
     - name: Start Fastci Tracer Action
       run: |
