@@ -17,13 +17,7 @@ runs:
 
     - name: Expose GitHub Runtime
       uses: fastci-dev/ghaction-github-runtime@master
-      
-    - name: Define and export docker function
-      shell: bash
-      run: |
-        echo test
-        #echo 'FASTCI=docker() { bash /home/runner/work/github-actions-tests/github-actions-tests/docker-build-alias.sh "$@";}' >> $GITHUB_ENV
-        
+              
     - name: Start Fastci Tracer Action
       run: |
         # Download files in parallel using wget
@@ -39,5 +33,5 @@ runs:
         mv docker.sh /home/runner/.local/bin/docker  || true
 
         # Start tracer
-        sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 JFROG_USER_WRITER=${JFROG_USER_WRITER} JFROG_PASSWORD_WRITER=${JFROG_PASSWORD_WRITER} ./tracer-bin &
+        sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &
       shell: bash
