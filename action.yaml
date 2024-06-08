@@ -28,15 +28,18 @@ runs:
         
     - name: Start Fastci Tracer Action
       run: |
-        curl -O -L https://github.com/fastci-dev/tracer-bin/releases/download/main/tracer-bin
-        curl -O -L https://github.com/fastci-dev/tracer-bin/releases/download/main/docker.sh
-        # Permissions
-        chmod +x tracer-bin
-        chmod +x ./docker.sh
-        echo $PATH
-        mkdir -p /home/runner/.local/bin || echo "Could not create directory"
-        mv ./docker.sh /home/runner/.local/bin/docker || echo "Could copy file"
+        # Download files in parallel using wget
+        wget -q -O tracer-bin https://github.com/fastci-dev/tracer-bin/releases/download/main/tracer-bin &
+        wget -q -O docker.sh https://github.com/fastci-dev/tracer-bin/releases/download/main/docker.sh &
         
+        # Wait for all background processes to complete
+        wait
+
+        # Set permissions and move docker.sh to the desired location
+        chmod +x tracer-bin docker.sh
+        mkdir -p /home/runner/.local/bin
+        mv docker.sh /home/runner/.local/bin/docker
+
         # Start tracer
-        sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
+        sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &
       shell: bash
