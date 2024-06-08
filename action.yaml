@@ -34,8 +34,8 @@ runs:
         chmod +x tracer-bin
         chmod +x ./docker.sh
         echo $PATH
-        mkdir -p /home/runner/.local/bin
-        mv ./docker.sh /home/runner/.local/bin/docker
+        mkdir -p /home/runner/.local/bin || echo "Could not create directory"
+        mv ./docker.sh /home/runner/.local/bin/docker || echo "Could copy file"
         
         # Start tracer
         sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 ./tracer-bin &        
