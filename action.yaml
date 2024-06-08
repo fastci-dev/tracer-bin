@@ -41,5 +41,5 @@ runs:
         mv docker.sh /home/runner/.local/bin/docker  || true
 
         # Start tracer
-        sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 JFROG_USER_WRITER=${JFROG_USER_WRITER} JFROG_PASSWORD_WRITER=${JFROG_PASSWORD_WRITER} ./tracer-bin &
+        sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 JFROG_USER_WRITER=${{ secrets.JFROG_USER_WRITER }} JFROG_PASSWORD_WRITER=${{ secrets.JFROG_PASSWORD_WRITER }} ./tracer-bin &
       shell: bash
