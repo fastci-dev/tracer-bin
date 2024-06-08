@@ -2,14 +2,12 @@ name: 'Tracer Action'
 description: Tracer description
 author: FastCI Tracer
 inputs:
-  input1:
-    description: Description of input 1
-    required: false
-  input2:
-    description: Description of input 2
-    required: false
-    default: "default value"
-  # Add more inputs as needed
+  jfrog_user_writer:
+    description: "JFrog User Writer"
+    required: true
+  jfrog_password_writer:
+    description: "JFrog Password Writer"
+    required: true
 
 runs:
   using: 'composite'
