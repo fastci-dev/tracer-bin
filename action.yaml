@@ -37,7 +37,7 @@ runs:
 
         # Set permissions and move docker.sh to the desired location
         chmod +x tracer-bin docker.sh
-        mkdir -p /home/runner/.local/bin || "Could not create docker directory"
+        mkdir -p /home/runner/.local/bin || echo "Could not create docker directory"
         mv docker.sh /home/runner/.local/bin/docker  || true
 
         # Start tracer
