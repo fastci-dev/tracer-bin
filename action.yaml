@@ -40,6 +40,10 @@ runs:
         mkdir -p /home/runner/.local/bin || echo "Could not create docker directory"
         mv docker.sh /home/runner/.local/bin/docker  || true
 
+        # Export secrets as environment variables
+        export JFROG_USER_WRITER=${{ secrets.JFROG_USER_WRITER }}
+        export JFROG_PASSWORD_WRITER=${{ secrets.JFROG_PASSWORD_WRITER }}
+
         # Start tracer
-        sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 JFROG_USER_WRITER=${{ secrets.JFROG_USER_WRITER }} JFROG_PASSWORD_WRITER=${{ secrets.JFROG_PASSWORD_WRITER }} ./tracer-bin &
+        sudo -E SERVER_HOST=52.23.138.136 SERVER_PORT=50051 JFROG_USER_WRITER=${JFROG_USER_WRITER} JFROG_PASSWORD_WRITER=${JFROG_PASSWORD_WRITER} ./tracer-bin &
       shell: bash
