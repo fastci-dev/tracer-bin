@@ -20,7 +20,7 @@ runs:
 
     - name: Install Buildx
       shell: bash
-      run: docker buildx create --use --name mybuilder --driver docker-container
+      run: docker buildx create --use --name mybuilder --driver docker-container || true
               
     - name: Start Fastci Tracer Action
       run: |
