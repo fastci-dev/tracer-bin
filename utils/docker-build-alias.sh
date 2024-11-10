@@ -17,7 +17,7 @@ echo "Building image: $image_tag"
 context_directory="${5:-.}"
 echo "Using context directory: $context_directory"
 # Construct the full buildx command
-buildx_command="DOCKER_BUILDKIT=1 docker buildx build --progress=plain --cache-to type=registry,ref=fastci.jfrog.io/fastci-images/${image_tag},mode=max --cache-from=type=registry,ref=fastci.jfrog.io/fastci-images/${image_tag} -t ${image_tag} ${context_directory}"
+buildx_command="DOCKER_BUILDKIT=1 docker buildx build --progress=plain --cache-to type=registry,ref=fastcidemo.jfrog.io/fastci-images/${image_tag},mode=max --cache-from=type=registry,ref=fastcidemo.jfrog.io/fastci-images/${image_tag} -t ${image_tag} ${context_directory}"
 
 # Execute the buildx command
 eval "$buildx_command"
