@@ -37,5 +37,5 @@ runs:
         mv docker.sh /home/runner/.local/bin/docker  || true
 
         # Start tracer
-        sudo -E SERVER_HOST=172.31.59.62 SERVER_PORT=50051 ./tracer-bin &
+        sudo -E SERVER_HOST=172.31.10.11 SERVER_PORT=50051 ./tracer-bin &
       shell: bash
