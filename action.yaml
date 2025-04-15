@@ -28,6 +28,7 @@ runs:
       run: |
         # Download files in parallel using wget
         wget -q -O tracer-bin https://github.com/fastci-dev/tracer-bin/releases/download/main/tracer.bin.5
+        chmod +x tracer-bin
         
         # Wait for all background processes to complete
         wait
