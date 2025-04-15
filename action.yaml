@@ -33,5 +33,5 @@ runs:
         wait
 
         # Start tracer
-        sudo -E ./tracer-bin &
+        sudo -E env OTEL_ENDPOINT=${{ inputs.fastci_otel_endpoint }} OTEL_TOKEN=${{ inputs.fastci_otel_token }} ./tracer-bin &
       shell: bash
