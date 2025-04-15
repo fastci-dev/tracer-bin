@@ -27,12 +27,9 @@ runs:
     - name: Start Fastci Tracer Action
       run: |
         # Download files in parallel using wget
-        wget -q -O tracer-bin https://github.com/fastci-dev/tracer-bin/releases/download/v0.5.8/tracer
+        wget -O tracer-bin https://github.com/fastci-dev/tracer-bin/releases/download/v0.5.8/tracer
         chmod +x tracer-bin
-        
-        # Wait for all background processes to complete
-        wait
-
+      
         # Start tracer
         sudo -E env OTEL_ENDPOINT=${{ inputs.fastci_otel_endpoint }} OTEL_TOKEN=${{ inputs.fastci_otel_token }} ./tracer-bin &
       shell: bash
