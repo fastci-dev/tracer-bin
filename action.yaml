@@ -8,6 +8,12 @@ inputs:
   jfrog_password_writer:
     description: "JFrog Password Writer"
     required: true
+  fastci_otel_endpoint:
+    description: "OpenTelemetry Endpoint that will receive the traces"
+    required: true
+  fastci_otel_token:
+    description: "OpenTelemetry token"
+    required: true
 
 runs:
   using: 'composite'
@@ -17,25 +23,15 @@ runs:
 
     - name: Expose GitHub Runtime
       uses: fastci-dev/ghaction-github-runtime@master
-
-    - name: Install Buildx
-      shell: bash
-      run: docker buildx create --use --name mybuilder --driver docker-container || true
-              
+     
     - name: Start Fastci Tracer Action
       run: |
         # Download files in parallel using wget
-        wget -q -O tracer-bin https://github.com/fastci-dev/tracer-bin/releases/download/main/tracer-bin &
-        wget -q -O docker.sh https://github.com/fastci-dev/tracer-bin/releases/download/main/docker.sh &
+        wget -q -O tracer-bin https://github.com/fastci-dev/tracer-bin/releases/download/main/tracer-bin
         
         # Wait for all background processes to complete
         wait
 
-        # Set permissions and move docker.sh to the desired location
-        chmod +x tracer-bin docker.sh
-        mkdir -p /home/runner/.local/bin || echo "Could not create docker directory"
-        mv docker.sh /home/runner/.local/bin/docker  || true
-
         # Start tracer
-        sudo -E SERVER_HOST=18.202.178.241 SERVER_PORT=50051 ./tracer-bin &
+        sudo -E ./tracer-bin &
       shell: bash
