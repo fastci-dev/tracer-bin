@@ -23,7 +23,8 @@ async function run(): Promise<void> {
         const tracerBinPath = path.join(process.cwd(), 'tracer-bin');
         await io.cp(tracerPath, tracerBinPath);
         await fs.promises.chmod(tracerBinPath, '755');
-
+        process.env["OTEL.ENDPOINT"] = otelEndpoint
+        process.env["OTEL.TOKEN"] = otelToken
         // Start tracer
         core.info('Starting tracer...');
         core.info(otelEndpoint);
@@ -32,7 +33,6 @@ async function run(): Promise<void> {
             detached: true,
             stdio: 'ignore',
             env: {
-                ...process.env,
                 OTEL_ENDPOINT: otelEndpoint,
                 OTEL_TOKEN: otelToken
             }
