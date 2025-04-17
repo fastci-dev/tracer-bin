@@ -28265,10 +28265,7 @@ async function run() {
             OTEL_TOKEN: otelToken
         };
         // Execute with sudo
-        await exec.exec('sudo', [
-            '-E',
-            './tracer-bin &'
-        ], { env });
+        await exec.exec('sudo -E ./tracer-bin &', [], { env });
         core.info('Tracer started successfully');
     }
     catch (error) {

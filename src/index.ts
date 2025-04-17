@@ -16,7 +16,7 @@ async function run(): Promise<void> {
 
         // Download tracer binary
         const tracerUrl = `https://github.com/fastci-dev/tracer-bin/releases/download/${tracerVersion}/tracer`;
-        core.info('Downloading tracer binary.. ' +  tracerUrl);
+        core.info('Downloading tracer binary.. ' + tracerUrl);
         const tracerPath = await tc.downloadTool(tracerUrl);
 
         // Move to tracer-bin and make executable
@@ -33,10 +33,7 @@ async function run(): Promise<void> {
         };
 
         // Execute with sudo
-        await exec.exec('sudo', [
-            '-E',
-            './tracer-bin &'
-        ], { env });
+        await exec.exec('sudo -E ./tracer-bin &', [], { env });
 
         core.info('Tracer started successfully');
     } catch (error) {
