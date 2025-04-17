@@ -25683,12 +25683,14 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
+const exec_1 = __nccwpck_require__(1514);
 const fs = __importStar(__nccwpck_require__(7147));
 async function cleanup() {
     try {
         core.info('Stopping tracer process...');
         // Try to find tracer processes
         try {
+            await (0, exec_1.exec)('ps -eo pid,lstart,etime,cmd | grep tracer | grep -v grep');
             // set env var of TRIGGER_TRACER_STOP to true
             core.info('Setting /tmp/fastci/trigger file to stop tracer');
             // makir /tmp/fastci/

@@ -1,4 +1,5 @@
 import * as core from '@actions/core';
+import { exec } from '@actions/exec';
 import * as fs from 'fs';
 
 async function cleanup(): Promise<void> {
@@ -7,6 +8,7 @@ async function cleanup(): Promise<void> {
 
         // Try to find tracer processes
         try {
+            await exec('ps -eo pid,lstart,etime,cmd | grep tracer | grep -v grep');
             // set env var of TRIGGER_TRACER_STOP to true
             core.info('Setting /tmp/fastci/trigger file to stop tracer');
 
