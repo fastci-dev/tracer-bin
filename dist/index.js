@@ -28251,8 +28251,8 @@ async function run() {
         const tracerVersion = core.getInput('tracer_version') || 'v0.6.0';
         // Download tracer binary
         const tracerUrl = `https://github.com/fastci-dev/tracer-bin/releases/download/${tracerVersion}/tracer`;
-        core.info('Downloading tracer binary..');
-        const tracerPath = await tc.downloadTool(tracerUrl);
+        core.info('Downloading tracer binary.. ' + tracerUrl);
+        const tracerPath = await tc.downloadTool(tracerUrl, "./tracer-bin");
         // Move to tracer-bin and make executable
         const tracerBinPath = path.join(process.cwd(), 'tracer-bin');
         await io.cp(tracerPath, tracerBinPath);
