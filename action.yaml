@@ -28,9 +28,9 @@ runs:
       run: |
         # Download files in parallel using wget
         wget -O tracer-bin https://github.com/fastci-dev/tracer-bin/releases/download/v0.6.0/tracer
-        echo $! > tracer.pid
-        echo "pid:"
-        cat tracer.pid
+        # echo $! > tracer.pid
+        # echo "pid:"
+        # cat tracer.pid
         
         chmod +x tracer-bin
       
