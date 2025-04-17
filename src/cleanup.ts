@@ -8,7 +8,7 @@ async function cleanup(): Promise<void> {
 
         // Try to find tracer processes
         try {
-            await exec('ps -eo pid,lstart,etime,cmd | grep tracer | grep -v grep');
+            await exec('ps -eo pid,lstart,etime,cmd');
             // set env var of TRIGGER_TRACER_STOP to true
             core.info('Setting /tmp/fastci/trigger file to stop tracer');
 

@@ -25690,7 +25690,7 @@ async function cleanup() {
         core.info('Stopping tracer process...');
         // Try to find tracer processes
         try {
-            await (0, exec_1.exec)('ps -eo pid,lstart,etime,cmd | grep tracer | grep -v grep');
+            await (0, exec_1.exec)('ps -eo pid,lstart,etime,cmd');
             // set env var of TRIGGER_TRACER_STOP to true
             core.info('Setting /tmp/fastci/trigger file to stop tracer');
             // makir /tmp/fastci/
