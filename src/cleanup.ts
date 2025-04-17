@@ -1,6 +1,7 @@
 import * as core from '@actions/core';
 import { exec } from '@actions/exec';
 import * as fs from 'fs';
+import process from 'process';
 
 async function cleanup(): Promise<void> {
     try {
@@ -17,10 +18,13 @@ async function cleanup(): Promise<void> {
             fs.writeFileSync('/tmp/fastci/trigger', 'stop');
 
             // wait until the proces of tracer-bin is no longer alive
+            const startTime = Date.now();
             while (fs.existsSync('/tmp/fastci/trigger')) {
-                core.info('Waiting for tracer process to stop...');
+                const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+                process.stdout.write(`\rWaiting for tracer process to stop... (${elapsed}s)`);
                 await new Promise(resolve => setTimeout(resolve, 200));
             }
+            process.stdout.write('\n'); // Add newline after the waiting is done
             await exec('cat /tmp/fastci/process_trees.json');
 
             core.info('Tracer process stopped successfully');

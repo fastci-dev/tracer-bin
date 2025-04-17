@@ -25681,10 +25681,14 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const exec_1 = __nccwpck_require__(1514);
 const fs = __importStar(__nccwpck_require__(7147));
+const process_1 = __importDefault(__nccwpck_require__(7282));
 async function cleanup() {
     try {
         core.info('Stopping tracer process...');
@@ -25696,10 +25700,13 @@ async function cleanup() {
             // write the trigger file
             fs.writeFileSync('/tmp/fastci/trigger', 'stop');
             // wait until the proces of tracer-bin is no longer alive
+            const startTime = Date.now();
             while (fs.existsSync('/tmp/fastci/trigger')) {
-                core.info('Waiting for tracer process to stop...');
+                const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+                process_1.default.stdout.write(`\rWaiting for tracer process to stop... (${elapsed}s)`);
                 await new Promise(resolve => setTimeout(resolve, 200));
             }
+            process_1.default.stdout.write('\n'); // Add newline after the waiting is done
             await (0, exec_1.exec)('cat /tmp/fastci/process_trees.json');
             core.info('Tracer process stopped successfully');
         }
@@ -25889,6 +25896,14 @@ module.exports = require("path");
 
 "use strict";
 module.exports = require("perf_hooks");
+
+/***/ }),
+
+/***/ 7282:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("process");
 
 /***/ }),
 
