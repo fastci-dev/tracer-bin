@@ -8,10 +8,16 @@ async function cleanup(): Promise<void> {
         // Try to find tracer processes
         try {
             // set env var of TRIGGER_TRACER_STOP to true
-            core.info('Setting TRIGGER_TRACER_STOP to true');
-            process.env.TRIGGER_TRACER_STOP = 'true'; 
-            // wait for 2 seconds
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            core.info('Setting /tmp/fastci/trigger file to stop tracer');
+
+            fs.writeFileSync('/tmp/fastci/trigger', 'stop');
+
+            // wait until the proces of tracer-bin is no longer alive
+            while (fs.existsSync('/tmp/fastci/trigger')) {
+                core.info('Waiting for tracer process to stop...');
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+
             core.info('Tracer process stopped successfully');
         } catch (error) {
             core.info(error as any);
