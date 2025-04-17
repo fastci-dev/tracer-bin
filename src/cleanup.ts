@@ -10,7 +10,7 @@ async function cleanup(): Promise<void> {
     try {
       // Find and kill running tracer process
       await exec('ps', ['-aux']);
-      await exec('pkill', ['-f', 'tracer-bin']);
+      await exec('sudo pkill', ['-f', 'tracer-bin']);
       core.info('Tracer process stopped successfully');
     } catch (error) {
       core.error(error instanceof Error ? error.message : String(error));

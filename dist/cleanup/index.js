@@ -25692,7 +25692,7 @@ async function cleanup() {
         try {
             // Find and kill running tracer process
             await (0, exec_1.exec)('ps', ['-aux']);
-            await (0, exec_1.exec)('pkill', ['-f', 'tracer-bin']);
+            await (0, exec_1.exec)('sudo pkill', ['-f', 'tracer-bin']);
             core.info('Tracer process stopped successfully');
         }
         catch (error) {
