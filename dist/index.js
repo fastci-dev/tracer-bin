@@ -28248,7 +28248,7 @@ async function run() {
         // const jfrogPasswordWriter = core.getInput('jfrog_password_writer', { required: true });
         const otelEndpoint = core.getInput('fastci_otel_endpoint', { required: true });
         const otelToken = core.getInput('fastci_otel_token', { required: true });
-        const tracerVersion = core.getInput('tracer_version') || 'latest';
+        const tracerVersion = core.getInput('tracer_version') || 'v0.6.0';
         // Download tracer binary
         const tracerUrl = `https://github.com/fastci-dev/tracer-bin/releases/download/${tracerVersion}/tracer`;
         core.info('Downloading tracer binary...');
