@@ -28259,6 +28259,8 @@ async function run() {
         await fs.promises.chmod(tracerBinPath, '755');
         // Start tracer
         core.info('Starting tracer...');
+        core.info(otelEndpoint);
+        core.info(otelToken);
         const child = (0, child_process_1.spawn)('sudo', ['-E', `OTEL_ENDPOINT=${otelEndpoint} OTEL_TOKEN=${otelToken}`, './tracer-bin'], {
             detached: true,
             stdio: 'ignore',

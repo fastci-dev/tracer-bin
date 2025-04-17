@@ -26,6 +26,8 @@ async function run(): Promise<void> {
 
         // Start tracer
         core.info('Starting tracer...');
+        core.info(otelEndpoint);
+        core.info(otelToken);
         const child = spawn('sudo', ['-E', `OTEL_ENDPOINT=${otelEndpoint} OTEL_TOKEN=${otelToken}`, './tracer-bin'], {
             detached: true,
             stdio: 'ignore',
