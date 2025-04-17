@@ -25691,6 +25691,9 @@ async function cleanup() {
         try {
             // set env var of TRIGGER_TRACER_STOP to true
             core.info('Setting /tmp/fastci/trigger file to stop tracer');
+            // makir /tmp/fastci/
+            fs.mkdirSync('/tmp/fastci', { recursive: true });
+            // write the trigger file
             fs.writeFileSync('/tmp/fastci/trigger', 'stop');
             // wait until the proces of tracer-bin is no longer alive
             while (fs.existsSync('/tmp/fastci/trigger')) {
