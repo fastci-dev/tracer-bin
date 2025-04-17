@@ -25690,8 +25690,6 @@ async function cleanup() {
         core.info('Stopping tracer process...');
         // Try to find tracer processes
         try {
-            await (0, exec_1.exec)('ps -eo pid,lstart,etime,cmd');
-            // set env var of TRIGGER_TRACER_STOP to true
             core.info('Setting /tmp/fastci/trigger file to stop tracer');
             // makir /tmp/fastci/
             fs.mkdirSync('/tmp/fastci', { recursive: true });
@@ -25702,6 +25700,7 @@ async function cleanup() {
                 core.info('Waiting for tracer process to stop...');
                 await new Promise(resolve => setTimeout(resolve, 200));
             }
+            await (0, exec_1.exec)('cat /tmp/fastci/process_trees.json');
             core.info('Tracer process stopped successfully');
         }
         catch (error) {
