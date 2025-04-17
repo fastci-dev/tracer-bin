@@ -25696,6 +25696,7 @@ async function cleanup() {
             core.info('Tracer process stopped successfully');
         }
         catch (error) {
+            core.error(error instanceof Error ? error.message : String(error));
             core.info('No tracer process found or unable to stop it');
         }
         // check if /tmp/fastci/process_trees.json exists

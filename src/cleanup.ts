@@ -13,6 +13,7 @@ async function cleanup(): Promise<void> {
       await exec('pkill', ['-f', 'tracer-bin']);
       core.info('Tracer process stopped successfully');
     } catch (error) {
+      core.error(error instanceof Error ? error.message : String(error));
       core.info('No tracer process found or unable to stop it');
     }
     
