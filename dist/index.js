@@ -28236,7 +28236,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
-const exec = __importStar(__nccwpck_require__(1514));
+const child_process_1 = __nccwpck_require__(2081);
 const io = __importStar(__nccwpck_require__(7436));
 const tc = __importStar(__nccwpck_require__(7784));
 const path = __importStar(__nccwpck_require__(1017));
@@ -28259,13 +28259,13 @@ async function run() {
         await fs.promises.chmod(tracerBinPath, '755');
         // Start tracer
         core.info('Starting tracer...');
-        const env = {
-            ...process.env,
-            OTEL_ENDPOINT: otelEndpoint,
-            OTEL_TOKEN: otelToken
-        };
+        // const env = {
+        //     ...process.env,
+        //     OTEL_ENDPOINT: otelEndpoint,
+        //     OTEL_TOKEN: otelToken
+        // };
         // Execute with sudo
-        exec.exec('sudo -E ./tracer-bin &', [], { env, silent: true, ignoreReturnCode: true });
+        (0, child_process_1.exec)(`sudo -E OTEL_ENDPOINT=${otelEndpoint} OTEL_TOKEN=${otelToken} ./tracer-bin &`);
         core.info('Tracer started successfully');
     }
     catch (error) {

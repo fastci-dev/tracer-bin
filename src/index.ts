@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import * as exec from '@actions/exec';
+import { exec } from 'child_process';
 import * as io from '@actions/io';
 import * as tc from '@actions/tool-cache';
 import * as path from 'path';
@@ -26,14 +26,14 @@ async function run(): Promise<void> {
 
         // Start tracer
         core.info('Starting tracer...');
-        const env = {
-            ...process.env,
-            OTEL_ENDPOINT: otelEndpoint,
-            OTEL_TOKEN: otelToken
-        };
+        // const env = {
+        //     ...process.env,
+        //     OTEL_ENDPOINT: otelEndpoint,
+        //     OTEL_TOKEN: otelToken
+        // };
 
         // Execute with sudo
-        exec.exec('sudo -E ./tracer-bin &', [], { env, silent: true, ignoreReturnCode: true });
+        exec(`sudo -E OTEL_ENDPOINT=${otelEndpoint} OTEL_TOKEN=${otelToken} ./tracer-bin &`)
 
         core.info('Tracer started successfully');
     } catch (error) {
