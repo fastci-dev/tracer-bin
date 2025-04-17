@@ -25691,6 +25691,7 @@ async function cleanup() {
         // Try to find tracer processes
         try {
             // Find and kill running tracer process
+            await (0, exec_1.exec)('ps', ['-aux']);
             await (0, exec_1.exec)('pkill', ['--help']);
             core.info('Tracer process stopped successfully');
         }
