@@ -4,12 +4,13 @@ A GitHub Action for FastCI Tracer that collects and sends OpenTelemetry traces.
 
 ## Inputs
 
-| Name | Description | Required |
-|------|-------------|----------|
-| `jfrog_user_writer` | JFrog User Writer | Yes |
-| `jfrog_password_writer` | JFrog Password Writer | Yes |
-| `fastci_otel_endpoint` | OpenTelemetry Endpoint that will receive the traces | Yes |
-| `fastci_otel_token` | OpenTelemetry token | Yes |
+| Name | Description | Required | Default |
+|------|-------------|----------|---------|
+| `jfrog_user_writer` | JFrog User Writer | Yes | - |
+| `jfrog_password_writer` | JFrog Password Writer | Yes | - |
+| `fastci_otel_endpoint` | OpenTelemetry Endpoint that will receive the traces | Yes | - |
+| `fastci_otel_token` | OpenTelemetry token | Yes | - |
+| `tracer_version` | Version of the tracer binary to use | No | latest |
 
 ## Usage
 
@@ -36,6 +37,8 @@ jobs:
           jfrog_password_writer: ${{ secrets.JFROG_PASSWORD_WRITER }}
           fastci_otel_endpoint: ${{ secrets.FASTCI_OTEL_ENDPOINT }}
           fastci_otel_token: ${{ secrets.FASTCI_OTEL_TOKEN }}
+          # Optional: specify a different version
+          # tracer_version: v1.0.0
 ```
 
 ## Development

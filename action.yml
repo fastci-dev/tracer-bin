@@ -14,6 +14,10 @@ inputs:
   fastci_otel_token:
     description: "OpenTelemetry token"
     required: true
+  tracer_version:
+    description: "Version of the tracer binary to use"
+    required: false
+    default: "latest"
 
 runs:
   using: 'node20'
