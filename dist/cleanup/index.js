@@ -25683,7 +25683,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
-const exec_1 = __nccwpck_require__(1514);
+// import { exec } from '@actions/exec';
 const child_process_1 = __nccwpck_require__(2081);
 const fs = __importStar(__nccwpck_require__(7147));
 const { promisify } = __nccwpck_require__(3837);
@@ -25694,12 +25694,12 @@ async function cleanup() {
         // Try to find tracer processes
         try {
             // Find and kill running tracer process
-            await (0, exec_1.exec)('ps', ['-aux']);
+            // await exec('ps', ['-aux']);
             await execPromise('sudo pkill -f tracer-bin');
             core.info('Tracer process stopped successfully');
         }
         catch (error) {
-            core.error(error instanceof Error ? error.message : String(error));
+            core.info(error instanceof Error ? error.message : String(error));
             core.info('No tracer process found or unable to stop it');
         }
         // check if /tmp/fastci/process_trees.json exists
