@@ -1,0 +1,20 @@
+name: 'Tracer Action'
+description: Tracer description
+author: FastCI Tracer
+inputs:
+  jfrog_user_writer:
+    description: "JFrog User Writer"
+    required: true
+  jfrog_password_writer:
+    description: "JFrog Password Writer"
+    required: true
+  fastci_otel_endpoint:
+    description: "OpenTelemetry Endpoint that will receive the traces"
+    required: true
+  fastci_otel_token:
+    description: "OpenTelemetry token"
+    required: true
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js' 
