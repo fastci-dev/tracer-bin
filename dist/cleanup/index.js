@@ -25683,8 +25683,8 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
-// import { exec } from '@actions/exec';
-const child_process_1 = __nccwpck_require__(2081);
+const exec_1 = __nccwpck_require__(1514);
+// import { exec as execNative } from 'child_process';
 const fs = __importStar(__nccwpck_require__(7147));
 // import { stdout } from 'process';
 // const { promisify } = require('util');
@@ -25696,17 +25696,18 @@ async function cleanup() {
         try {
             // Find and kill running tracer process
             // await exec('ps', ['-aux']);
-            (0, child_process_1.exec)('sudo pkill -SIGTERM -f tracer-bin', (err, stdout, stderr) => {
-                if (err) {
-                    core.error(err);
-                }
-                if (stdout) {
-                    core.info(stdout);
-                }
-                if (stderr) {
-                    core.error(stderr);
-                }
-            });
+            await (0, exec_1.exec)('bash', ['-c', 'sudo pkill -SIGTERM -f tracer-bin']);
+            // execNative('sudo pkill -SIGTERM -f tracer-bin', (err, stdout, stderr) => {
+            //     if (err) {
+            //         core.error(err);
+            //     }
+            //     if (stdout) {
+            //         core.info(stdout);
+            //     }
+            //     if (stderr) {
+            //         core.error(stderr);
+            //     }
+            // });
             core.info('Tracer process stopped successfully');
         }
         catch (error) {
