@@ -25696,7 +25696,7 @@ async function cleanup() {
         try {
             // Find and kill running tracer process
             // await exec('ps', ['-aux']);
-            (0, child_process_1.exec)('sudo pkill -f tracer-bin', (err, stdout, stderr) => {
+            (0, child_process_1.exec)('sudo pkill -SIGTERM -f tracer-bin', (err, stdout, stderr) => {
                 if (err) {
                     core.error(err);
                 }
