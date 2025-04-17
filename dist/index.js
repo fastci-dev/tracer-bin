@@ -28264,6 +28264,11 @@ async function run() {
         const child = (0, child_process_1.spawn)('sudo', ['-E', `OTEL_ENDPOINT=${otelEndpoint} OTEL_TOKEN=${otelToken}`, './tracer-bin'], {
             detached: true,
             stdio: 'ignore',
+            env: {
+                ...process.env,
+                OTEL_ENDPOINT: otelEndpoint,
+                OTEL_TOKEN: otelToken
+            }
         });
         // Unref the child to allow the parent process to exit independently
         child.unref();
