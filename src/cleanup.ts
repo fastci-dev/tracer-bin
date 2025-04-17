@@ -15,7 +15,7 @@ async function cleanup(): Promise<void> {
         try {
             // Find and kill running tracer process
             // await exec('ps', ['-aux']);
-            await exec('bash', ['-c', 'sudo pkill -SIGTERM -f tracer-bin']);
+            await exec('sudo', ['pkill', '-SIGTERM', '-f', 'tracer-bin']);
             // execNative('sudo pkill -SIGTERM -f tracer-bin', (err, stdout, stderr) => {
             //     if (err) {
             //         core.error(err);
@@ -29,7 +29,7 @@ async function cleanup(): Promise<void> {
             // });
             core.info('Tracer process stopped successfully');
         } catch (error) {
-            core.info(error instanceof Error ? error.message : String(error));
+            core.info(error as any);
             core.info('No tracer process found or unable to stop it');
         }
 

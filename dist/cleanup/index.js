@@ -25696,7 +25696,7 @@ async function cleanup() {
         try {
             // Find and kill running tracer process
             // await exec('ps', ['-aux']);
-            await (0, exec_1.exec)('bash', ['-c', 'sudo pkill -SIGTERM -f tracer-bin']);
+            await (0, exec_1.exec)('sudo', ['pkill', '-SIGTERM', '-f', 'tracer-bin']);
             // execNative('sudo pkill -SIGTERM -f tracer-bin', (err, stdout, stderr) => {
             //     if (err) {
             //         core.error(err);
@@ -25711,7 +25711,7 @@ async function cleanup() {
             core.info('Tracer process stopped successfully');
         }
         catch (error) {
-            core.info(error instanceof Error ? error.message : String(error));
+            core.info(error);
             core.info('No tracer process found or unable to stop it');
         }
         // check if /tmp/fastci/process_trees.json exists
