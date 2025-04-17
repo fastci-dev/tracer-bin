@@ -25683,17 +25683,23 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
+const exec_1 = __nccwpck_require__(1514);
+// import { exec as execNative } from 'child_process';
 const fs = __importStar(__nccwpck_require__(7147));
+// import { stdout } from 'process';
+// const { promisify } = require('util');
+// const execPromise = promisify(execNative);
 async function cleanup() {
     try {
         core.info('Stopping tracer process...');
         // Try to find tracer processes
         try {
-            // set env var of TRIGGER_TRACER_STOP to true
-            core.info('Setting TRIGGER_TRACER_STOP to true');
-            process.env.TRIGGER_TRACER_STOP = 'true';
-            // wait for 2 seconds
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            // Find and kill running tracer process
+            // await exec('ps', ['-aux']);
+            const { stdout, stderr, exitCode } = await (0, exec_1.getExecOutput)('pkill', ['-SIGINT', '-f', 'tracer-bin']);
+            core.info(`stdout: ${stdout}`);
+            core.info(`stderr: ${stderr}`);
+            core.info(`exitCode: ${exitCode}`);
             core.info('Tracer process stopped successfully');
         }
         catch (error) {

@@ -12,7 +12,7 @@ async function run(): Promise<void> {
         // const jfrogPasswordWriter = core.getInput('jfrog_password_writer', { required: true });
         const otelEndpoint = core.getInput('fastci_otel_endpoint', { required: true });
         const otelToken = core.getInput('fastci_otel_token', { required: true });
-        const tracerVersion = core.getInput('tracer_version') || 'v0.6.0';
+        const tracerVersion = core.getInput('tracer_version');
 
         // Download tracer binary
         const tracerUrl = `https://github.com/fastci-dev/tracer-bin/releases/download/${tracerVersion}/tracer`;
@@ -26,14 +26,6 @@ async function run(): Promise<void> {
 
         // Start tracer
         core.info('Starting tracer...');
-
-        // Properly spawn a detached process
-        // const env = {
-        //     ...process.env,
-        //     OTEL_ENDPOINT: otelEndpoint,
-        //     OTEL_TOKEN: otelToken
-        // };
-
         const child = spawn('sudo', ['-E', `OTEL_ENDPOINT=${otelEndpoint} OTEL_TOKEN=${otelToken}`, './tracer-bin'], {
             detached: true,
             stdio: 'ignore',
