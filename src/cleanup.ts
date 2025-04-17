@@ -2,9 +2,10 @@ import * as core from '@actions/core';
 // import { exec } from '@actions/exec';
 import { exec as execNative } from 'child_process';
 import * as fs from 'fs';
-const { promisify } = require('util');
+// import { stdout } from 'process';
+// const { promisify } = require('util');
 
-const execPromise = promisify(execNative);
+// const execPromise = promisify(execNative);
 
 async function cleanup(): Promise<void> {
     try {
@@ -14,7 +15,17 @@ async function cleanup(): Promise<void> {
         try {
             // Find and kill running tracer process
             // await exec('ps', ['-aux']);
-            await execPromise('sudo pkill -f tracer-bin');
+            execNative('sudo pkill -f tracer-bin', (err, stdout, stderr) => {
+                if (err) {
+                    core.error(err);
+                }
+                if (stdout) {
+                    core.info(stdout);
+                }
+                if (stderr) {
+                    core.error(stderr);
+                }
+            });
             core.info('Tracer process stopped successfully');
         } catch (error) {
             core.info(error instanceof Error ? error.message : String(error));

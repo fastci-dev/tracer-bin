@@ -25686,8 +25686,9 @@ const core = __importStar(__nccwpck_require__(2186));
 // import { exec } from '@actions/exec';
 const child_process_1 = __nccwpck_require__(2081);
 const fs = __importStar(__nccwpck_require__(7147));
-const { promisify } = __nccwpck_require__(3837);
-const execPromise = promisify(child_process_1.exec);
+// import { stdout } from 'process';
+// const { promisify } = require('util');
+// const execPromise = promisify(execNative);
 async function cleanup() {
     try {
         core.info('Stopping tracer process...');
@@ -25695,7 +25696,17 @@ async function cleanup() {
         try {
             // Find and kill running tracer process
             // await exec('ps', ['-aux']);
-            await execPromise('sudo pkill -f tracer-bin');
+            (0, child_process_1.exec)('sudo pkill -f tracer-bin', (err, stdout, stderr) => {
+                if (err) {
+                    core.error(err);
+                }
+                if (stdout) {
+                    core.info(stdout);
+                }
+                if (stderr) {
+                    core.error(stderr);
+                }
+            });
             core.info('Tracer process stopped successfully');
         }
         catch (error) {
