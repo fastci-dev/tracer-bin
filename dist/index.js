@@ -28259,14 +28259,19 @@ async function run() {
         await fs.promises.chmod(tracerBinPath, '755');
         // Start tracer
         core.info('Starting tracer...');
+        // Properly spawn a detached process
         // const env = {
         //     ...process.env,
         //     OTEL_ENDPOINT: otelEndpoint,
         //     OTEL_TOKEN: otelToken
         // };
-        // Execute with sudo
-        (0, child_process_1.exec)(`sudo -E OTEL_ENDPOINT=${otelEndpoint} OTEL_TOKEN=${otelToken} ./tracer-bin &`);
-        core.info('Tracer started successfully');
+        const child = (0, child_process_1.spawn)('sudo', ['-E', `OTEL_ENDPOINT=${otelEndpoint} OTEL_TOKEN=${otelToken}`, './tracer-bin'], {
+            detached: true,
+            stdio: 'ignore',
+        });
+        // Unref the child to allow the parent process to exit independently
+        child.unref();
+        core.info('Tracer started successfully in background');
     }
     catch (error) {
         if (error instanceof Error) {

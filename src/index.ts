@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import { exec } from 'child_process';
+import { spawn } from 'child_process';
 import * as io from '@actions/io';
 import * as tc from '@actions/tool-cache';
 import * as path from 'path';
@@ -26,16 +26,23 @@ async function run(): Promise<void> {
 
         // Start tracer
         core.info('Starting tracer...');
+
+        // Properly spawn a detached process
         // const env = {
         //     ...process.env,
         //     OTEL_ENDPOINT: otelEndpoint,
         //     OTEL_TOKEN: otelToken
         // };
 
-        // Execute with sudo
-        exec(`sudo -E OTEL_ENDPOINT=${otelEndpoint} OTEL_TOKEN=${otelToken} ./tracer-bin &`)
+        const child = spawn('sudo', ['-E', `OTEL_ENDPOINT=${otelEndpoint} OTEL_TOKEN=${otelToken}`, './tracer-bin'], {
+            detached: true,
+            stdio: 'ignore',
+        });
 
-        core.info('Tracer started successfully');
+        // Unref the child to allow the parent process to exit independently
+        child.unref();
+
+        core.info('Tracer started successfully in background');
     } catch (error) {
         if (error instanceof Error) {
             core.setFailed(error.message);
