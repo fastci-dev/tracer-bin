@@ -25683,7 +25683,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
-// import { exec } from '@actions/exec';
+const exec_1 = __nccwpck_require__(1514);
 const fs = __importStar(__nccwpck_require__(7147));
 async function cleanup() {
     try {
@@ -25691,7 +25691,7 @@ async function cleanup() {
         // Try to find tracer processes
         try {
             // Find and kill running tracer process
-            //   await exec('pkill', ['-f', 'tracer-bin']);
+            await (0, exec_1.exec)('pkill', ['--help']);
             core.info('Tracer process stopped successfully');
         }
         catch (error) {

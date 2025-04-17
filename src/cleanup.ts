@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-// import { exec } from '@actions/exec';
+import { exec } from '@actions/exec';
 import * as fs from 'fs';
 
 async function cleanup(): Promise<void> {
@@ -9,7 +9,7 @@ async function cleanup(): Promise<void> {
     // Try to find tracer processes
     try {
       // Find and kill running tracer process
-    //   await exec('pkill', ['-f', 'tracer-bin']);
+      await exec('pkill', ['--help']);
       core.info('Tracer process stopped successfully');
     } catch (error) {
       core.info('No tracer process found or unable to stop it');
