@@ -8,6 +8,7 @@ import { getJobsAnnotations, getPRsLabels, getWorkflowRun, listJobsForWorkflowRu
 
 import { createTracerProvider, stringToRecord } from "./tracer";
 import { traceWorkflowRun } from "./trace/workflow";
+import { exposeRuntime } from "../export-gh-env";
 
 async function fetchGithub(token: string, runId: number) {
   const octokit = getOctokit(token);
@@ -49,6 +50,7 @@ async function fetchGithub(token: string, runId: number) {
 
 export async function RunCiCdOtelExport() {
   try {
+    await exposeRuntime();
     const otlpEndpoint = core.getInput("fastci_otel_endpoint");
     const otlpToken = core.getInput("fastci_otel_token");
     const otlpHeaders = `Authorization=Bearer ${otlpToken}`;
