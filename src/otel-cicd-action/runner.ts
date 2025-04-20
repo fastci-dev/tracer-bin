@@ -8,7 +8,6 @@ import { getJobsAnnotations, getPRsLabels, getWorkflowRun, listJobsForWorkflowRu
 
 import { createTracerProvider, stringToRecord } from "./tracer";
 import { traceWorkflowRun } from "./trace/workflow";
-import { exposeRuntime } from "../export-gh-env";
 
 async function fetchGithub(token: string, runId: number) {
   const octokit = getOctokit(token);
@@ -50,14 +49,13 @@ async function fetchGithub(token: string, runId: number) {
 
 export async function RunCiCdOtelExport() {
   try {
-    await exposeRuntime();
     const otlpEndpoint = core.getInput("fastci_otel_endpoint");
     const otlpToken = core.getInput("fastci_otel_token");
     const otlpHeaders = `Authorization=Bearer ${otlpToken}`;
     const otelServiceName = core.getInput("otelServiceName") || process.env["OTEL_SERVICE_NAME"] || "";
     const runId = Number.parseInt(core.getInput("runId") || `${context.runId}`);
     const extraAttributes = stringToRecord(core.getInput("extraAttributes"));
-    const ghToken = core.getInput("githubToken") || process.env["ACTIONS_RUNTIME_TOKEN"] || "";
+    const ghToken = core.getInput("githubToken") || process.env["GITHUB_TOKEN"] || "";
 
     core.info("Use Github API to fetch workflow data");
     const { workflowRun, jobs, jobAnnotations, prLabels } = await fetchGithub(ghToken, runId);
