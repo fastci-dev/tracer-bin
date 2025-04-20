@@ -55,7 +55,7 @@ export async function RunCiCdOtelExport() {
     const otelServiceName = core.getInput("otelServiceName") || process.env["OTEL_SERVICE_NAME"] || "";
     const runId = Number.parseInt(core.getInput("runId") || `${context.runId}`);
     const extraAttributes = stringToRecord(core.getInput("extraAttributes"));
-    const ghToken = core.getInput("githubToken") || process.env["GITHUB_TOKEN"] || "";
+    const ghToken = core.getInput("github_token") || process.env["GITHUB_TOKEN"] || "";
 
     core.info("Use Github API to fetch workflow data");
     const { workflowRun, jobs, jobAnnotations, prLabels } = await fetchGithub(ghToken, runId);

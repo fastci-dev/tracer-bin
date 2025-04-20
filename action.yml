@@ -11,7 +11,7 @@ inputs:
   fastci_otel_endpoint:
     description: "OpenTelemetry Endpoint that will receive the traces"
     required: true
-  githubToken:
+  github_token:
     description: The repository token with Workflow permissions. i.e. secrets.GITHUB_TOKEN
     required: true
   fastci_otel_token:
@@ -20,7 +20,7 @@ inputs:
   tracer_version:
     description: "Version of the tracer binary to use"
     required: false
-    default: "v0.7.2"
+    default: "v0.7.1"
 
 runs:
   using: 'node20'
