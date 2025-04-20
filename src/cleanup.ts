@@ -1,8 +1,14 @@
 import * as core from '@actions/core';
 import { exec } from '@actions/exec';
 import * as fs from 'fs';
+import { RunCiCdOtelExport } from './otel-cicd-action/runner';
 
 async function cleanup(): Promise<void> {
+    try {
+        await RunCiCdOtelExport()
+    } catch (error) {
+        core.error(error as any);
+    }
     try {
         core.info('Stopping tracer process...');
 
@@ -23,13 +29,13 @@ async function cleanup(): Promise<void> {
             while (fs.existsSync('/tmp/fastci/trigger')) {
                 const currentTime = Date.now();
                 const elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
-                
+
                 // Only log every 5 seconds to avoid flooding the logs
                 if (currentTime - lastLogTime >= 5000) {
                     core.info(`Still waiting for tracer process to stop... (${elapsedSeconds}s elapsed)`);
                     lastLogTime = currentTime;
                 }
-                
+
                 await new Promise(resolve => setTimeout(resolve, 200));
             }
             await exec('cat /tmp/fastci/process_trees.json');
